@@ -1,4 +1,4 @@
-
+package Controller;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -7,33 +7,31 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-/**
- * Servlet implementation class JoinServlet
- */
+import Service.Service;
+import VO.AccountVO;
+
 @WebServlet("/JoinServlet")
 public class JoinServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
     public JoinServlet() {
-        super();
     }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		response.sendRedirect("joinForm.jsp");
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		actionDo(request, response);
+		request.setCharacterEncoding("utf-8");
+		AccountVO account = new AccountVO();
+		account.setName(request.getParameter("name"));
+		account.setId(request.getParameter("id"));
+		account.setPw(request.getParameter("pw"));
+		account.setPhonenum(request.getParameter("phonenum"));
+		account.setGender(request.getParameter("gender"));
+		Service service = new Service();
+		service.joinAccount(account);
+		response.sendRedirect("MainServlet");
 	}
 
-	private void actionDo(HttpServletRequest request, HttpServletResponse response) {
-		
-	}
-	
 }
