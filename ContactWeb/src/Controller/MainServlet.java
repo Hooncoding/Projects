@@ -1,12 +1,17 @@
 package Controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
+import Service.Service;
+import VO.ContactVO;
 
 @WebServlet("/MainServlet")
 public class MainServlet extends HttpServlet {
@@ -26,6 +31,10 @@ public class MainServlet extends HttpServlet {
 		if(id == null || name == null) {
 			response.sendRedirect("welcome.jsp");
 		}else {
+			ArrayList<ContactVO> member = new ArrayList<ContactVO>();
+			Service service = new Service();
+			member = service.selectAll(id);
+			
 			response.sendRedirect("main.jsp");			
 		}
 		

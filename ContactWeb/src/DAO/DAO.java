@@ -3,8 +3,10 @@ package DAO;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
 
 import VO.AccountVO;
+import VO.ContactVO;
 
 public class DAO {
 	Connection con = null;
@@ -59,11 +61,36 @@ public class DAO {
 			
 		}finally {
 			dbCon.close(con, pstmt);
+		}	
+	}
+	public ArrayList<ContactVO> selectAll(String id) {
+		ArrayList<ContactVO> member = new ArrayList<ContactVO>();
+		query 						= new StringBuilder();
+		dbCon 						= DBConnection.getInstance();
+		query.append("select * ");
+		query.append("from contact");
+		query.append("where owner = ?");
+		try {
+			con 	= dbCon.getConnection();
+			pstmt 	= con.prepareStatement(query.toString());
+			pstmt.setString(1, id);
+			rs 		= pstmt.executeQuery();
+			while(rs.next()) {
+				ContactVO contact = new ContactVO();
+				contact.setName(rs.getString("name"));
+				contact.setPhone(rs.getString("phone"));
+				contact.setAddress(rs.getString("address"));
+				contact.setCategory(rs.getString("category"));
+				member.add(contact);
+			}
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally{
+			dbCon.close(con, pstmt, rs);
 		}
 		
-		
-		
-		
+		return member;
 	}
 
 }
