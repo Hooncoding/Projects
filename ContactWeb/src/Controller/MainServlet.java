@@ -34,8 +34,8 @@ public class MainServlet extends HttpServlet {
 		}else {
 			ArrayList<ContactVO> contact = new ArrayList<ContactVO>();
 			Service service = new Service();
+//			contact = (ArrayList<ContactVO>) service.selectAll(id);
 			contact = service.selectAll(id);
-			
 			request.setAttribute("contact", contact);
 
 			RequestDispatcher disp = request.getRequestDispatcher("main.jsp");

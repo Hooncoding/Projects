@@ -37,6 +37,11 @@ public class Service {
 		dao.update(oldPhone, contact);
 	}
 
+	public void insertContact(String id, ContactVO contact) {
+		DAO dao = new DAO();
+		dao.insertContact(id, contact);
+	}
+
 	
 	
 

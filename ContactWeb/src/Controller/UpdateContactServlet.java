@@ -14,10 +14,10 @@ import Service.Service;
 import VO.ContactVO;
 
 @WebServlet("/ModifyServlet")
-public class ModifyServlet extends HttpServlet {
+public class UpdateContactServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
     public String oldPhone;
-    public ModifyServlet() {
+    public UpdateContactServlet() {
         super();
     }
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

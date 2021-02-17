@@ -146,6 +146,28 @@ public class DAO {
 			dbCon.close(con, pstmt);
 		}
 	}
+	public void insertContact(String id, ContactVO contact) {
+		dbCon = DBConnection.getInstance();
+		query = new StringBuilder();
+		query.append("insert into contact values(?,?,?,?,?)");
+		
+		try {
+			con = dbCon.getConnection();
+			pstmt = con.prepareStatement(query.toString());
+			pstmt.setString(1, contact.getName());
+			pstmt.setString(2, contact.getPhone());
+			pstmt.setString(3, contact.getAddress());
+			pstmt.setString(4, contact.getCategory());
+			pstmt.setString(5, id);
+			pstmt.executeUpdate();
+		}catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			dbCon.close(con, pstmt);
+		}
+		
+		
+	}
 	
 
 }

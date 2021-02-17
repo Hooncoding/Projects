@@ -44,12 +44,16 @@
 				<td>${contact.phone }</td>
 				<td>${contact.address }</td>
 				<td>${contact.category }</td>
-				<td><a href = "ModifyServlet?phone=${contact.phone }">수정</a></td>
+				<td><a href = "UpdateContactServlet?phone=${contact.phone }">수정</a></td>
 				<td><a href = "DeleteServlet?phone=${contact.phone }">삭제</a></td>
 			</tr>
 			</c:forEach>
 		</tbody>
 	</table>
+	
+	<form action = "InsertServlet" method = "get" name ="insert">
+		<input type = "submit" value="회원추가">
+	</form>
 	
 	
 			

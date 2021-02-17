@@ -8,7 +8,7 @@
 </head>
 <body>
 
-<form action = "ModifyServlet" method = "post" name = "modify">
+<form action = "UpdateContactServlet" method = "post" name = "update">
 	이름<br/>
 	<input type = "text" name = "name" placeholder="${contact.name }" onfocus="this.value=''"/><br/>
 	<br/>
