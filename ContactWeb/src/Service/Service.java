@@ -25,5 +25,20 @@ public class Service {
 		return member;
 	}
 
+	public ContactVO selectByPhone(String id, String phone) {
+		DAO dao = new DAO();
+		ContactVO contact = dao.selectByPhone(id, phone);
+		
+		return contact;
+	}
+
+	public void update(String oldPhone, ContactVO contact) {
+		DAO dao = new DAO();
+		dao.update(oldPhone, contact);
+	}
+
+	
+	
+
 
 }

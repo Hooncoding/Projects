@@ -3,6 +3,7 @@ package Controller;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -31,11 +32,15 @@ public class MainServlet extends HttpServlet {
 		if(id == null || name == null) {
 			response.sendRedirect("welcome.jsp");
 		}else {
-			ArrayList<ContactVO> member = new ArrayList<ContactVO>();
+			ArrayList<ContactVO> contact = new ArrayList<ContactVO>();
 			Service service = new Service();
-			member = service.selectAll(id);
+			contact = service.selectAll(id);
 			
-			response.sendRedirect("main.jsp");			
+			request.setAttribute("contact", contact);
+
+			RequestDispatcher disp = request.getRequestDispatcher("main.jsp");
+			disp.forward(request, response);
+//			response.sendRedirect("main.jsp");			
 		}
 		
 	

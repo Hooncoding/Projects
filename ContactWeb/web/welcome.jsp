@@ -26,7 +26,7 @@
 </head>
 <body>
 <div class="container-fluid text-center bg-main">
-	<p class="h1">모두의 연락처</p>
+	<p class="h1">어장관리(魚腸管理)</p>
 	<br/>
 	<br/>
 	<br/>

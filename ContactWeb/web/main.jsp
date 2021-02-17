@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -25,15 +26,33 @@
 
 </head>
 <body>
-<div class="container-fluid text-center bg-main">
-	<p class="h1">모두의 연락처</p>
-	<br/>
-	<br/>
-	<br/>
-	<form action = "loginForm.jsp" method = "get">
-	</form>
-</div>
+	<p class="h1">어장관리(魚腸管理)</p>
+	${name }님의 연락처 입니다.
 
+	<table class="table table-hover">
+		<thead>
+			<tr>
+				<th scope='col'>이름</th>
+				<th scope='col'>전화번호</th>
+				<th scope='col'>주소</th>
+				<th scope='col'>카테고리</th>
+		</thead>
+		<tbody>
+			<c:forEach items="${contact }" var = "contact">
+			<tr>
+				<td>${contact.name }</td>
+				<td>${contact.phone }</td>
+				<td>${contact.address }</td>
+				<td>${contact.category }</td>
+				<td><a href = "ModifyServlet?phone=${contact.phone }">수정</a></td>
+				<td><a href = "DeleteServlet?phone=${contact.phone }">삭제</a></td>
+			</tr>
+			</c:forEach>
+		</tbody>
+	</table>
+	
+	
+			
 
 </body>
 </html>

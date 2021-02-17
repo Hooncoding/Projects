@@ -67,9 +67,9 @@ public class DAO {
 		ArrayList<ContactVO> member = new ArrayList<ContactVO>();
 		query 						= new StringBuilder();
 		dbCon 						= DBConnection.getInstance();
-		query.append("select * ");
-		query.append("from contact");
-		query.append("where owner = ?");
+		query.append("select * 			");
+		query.append("	from contact	");
+		query.append("	where owner = ?	");
 		try {
 			con 	= dbCon.getConnection();
 			pstmt 	= con.prepareStatement(query.toString());
@@ -92,5 +92,60 @@ public class DAO {
 		
 		return member;
 	}
+	public ContactVO selectByPhone(String id, String phone) {
+		ContactVO contact = new ContactVO();
+		dbCon = DBConnection.getInstance();
+		query = new StringBuilder();
+		query.append("select *			");
+		query.append("  from contact	");
+		query.append(" where phone = ?	");
+		query.append("   and owner = ?	");
+		
+		try {
+			con 	= dbCon.getConnection();
+			pstmt 	= con.prepareStatement(query.toString());
+			pstmt.setString(1, phone);
+			pstmt.setString(2,  id);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+			contact.setName(rs.getString("name"));
+			contact.setPhone(rs.getString("phone"));
+			contact.setAddress(rs.getString("address"));
+			contact.setCategory(rs.getString("category"));
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			dbCon.close(con, pstmt, rs);
+		}
+		return contact;
+	}
+	public void update(String oldPhone, ContactVO contact) {
+		dbCon = DBConnection.getInstance();
+		query = new StringBuilder();
+		query.append("update contact set	");
+		query.append("   name = ?			");
+		query.append(" , phone = ?			");
+		query.append(" , address = ?		");
+		query.append(" , category = ?		");
+		query.append("  where phone = ?		");
+		
+		try {
+			con = dbCon.getConnection();
+			pstmt = con.prepareStatement(query.toString());
+			pstmt.setString(1, contact.getName());
+			pstmt.setString(2, contact.getPhone());
+			pstmt.setString(3, contact.getAddress());
+			pstmt.setString(4, contact.getCategory());
+			pstmt.setString(5, oldPhone);
+			int test = pstmt.executeUpdate();
+			System.out.println(test);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			dbCon.close(con, pstmt);
+		}
+	}
+	
 
 }
